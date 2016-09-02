@@ -67,6 +67,271 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2016-07-13-Git日常操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexo-test/2016/07/13/2016-07-13-Git日常操作/" class="article-date">
+  <time datetime="2016-07-12T16:00:00.000Z" itemprop="datePublished">2016-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexo-test/2016/07/13/2016-07-13-Git日常操作/">Git日常操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="版本控制器"><a href="#版本控制器" class="headerlink" title="版本控制器"></a>版本控制器</h3><p>　　顾名思义，就是做项目的版本管理，你也可以称它们为版本管理工具。假如现在你有一个文件夹，里面可以是项目，也可以是你的个人笔记(如我这个博客)，或者是你的简历等等，都可以使用git来管理(svn也行)。使用版本控制器的目的是为了可以查看以前的修改记录，如：你上周周每天都有对项目进行修改，等这周忽然发现上周某些修改其实是有问题的，或者因为其它原因你想看看你上次没修改之前的一些记录，这时你会怎么做？修改之前拷贝一份出来？有问题直接看之前的备份就行了，是的这样是可以解决刚才的问题，那么时间就会就会出现：项目1.0，项目1.0完成版，项目1.0最终版，项目1.0再也不改版，项目1.0打死也不改版。。。毕业设计的时候大家有没有遇到过这种？在项目上可能你不会这样做，因为项目本身的体积就不小,如果拷贝这么多份的话，先不说是不是很难管理，你的电脑内存就仅仅够装几个项目。再者，如果你的电脑忽然挂了，里面的资料全没了，那么你之前做的项目是不是也都白费了，有些人遇到这种事估计想死的心都有了。那么应该怎么来解决呢，我刚才提到的，有很多个版本需要修改，或者是防止电脑挂掉，项目丢失这些问题都是可以用 <code>版本控制器</code> 来解决的，</p>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>　　目前常用的版本控制器有Git和SVN，即使这两个你没有全用过，至少也会听过，我这里以Git为例，个人比较喜欢Git，你也可以看看这篇文章：<a href="http://www.worldhello.net/2012/04/12/why-git-is-better-than-svn.html" target="_blank" rel="external">为什么Git比SVN好</a>。我使用的的Mac，Mac上没自带Git环境，但是作为iOS开发者，我安装Xcode的时候，Xcode里是有自带Git的，所以我不需要考虑怎么去安装Git了，我没自己安装过就不乱贴链接了，你可以自己在Google或者百度上一搜Git安装，教程一大把。<br>　　你可以把Git看成是一个仓库管理员，它可以操作本地的仓库和远端的仓库，如果在没有服务器的情况下，也就不会有远端的仓库，那我们就先说本地仓库。<br><strong>建立仓库：</strong><br>你在目标文件夹下使命令：    </p>
+<blockquote>
+<ul>
+<li>git init </li>
+</ul>
+</blockquote>
+<p>就会创建一个 <code>.git</code> 隐藏文件，相当于已经建立了一个本地仓库。</p>
+<p><strong>添加到暂存区：</strong>      </p>
+<blockquote>
+<ul>
+<li>git add .</li>
+<li>git commit -m ‘提交记录1’</li>
+</ul>
+</blockquote>
+<p><code>add .</code> . 代表这个目录下的所有文件。<code>git add .</code> 就是把这个目录下的所有文件都添加进来，然后 <code>git commit -m &#39;提交记录1&#39;</code> 然后提交，-m 后面的是提交记录，每次提交的时候都需要写提交记录，内容自己定义，目的是为了以后方便查找记录，回退到现在这次提交上等等操作。到目前为止，你就已经有本地仓库了，你再次对文件内容做修改后，继续做类似的操作 <code>git add .</code> <code>git commit -m &#39;提交记录2&#39;</code>… 每次你可以使用 <code>git status</code> 查看，是有你的文件内容有修改，如果有，就会有红色的提示信息，当你使用 <code>git add .</code> 之后在使用 <code>git status</code> 查看，就会变成绿色的提示信息了，等你使用<code>git commit -m &#39;提交记录3&#39;</code> 后再使用 <code>git status</code> 查看，就会发现你没有新的修改信息了，这个时候你就可以使用 <code>git log</code> 就会然后之前每次的提交信息。</p>
+<h3 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h3><p>git branc 查看时如出现</p>
+<blockquote>
+<ul>
+<li><ul>
+<li>(HEAD detached at analytics_v2)   </li>
+</ul>
+</li>
+<li>dev</li>
+<li>master</li>
+</ul>
+</blockquote>
+<p>代表现在已经进入一个临时的HEAD，可以使用 <code>git checkout -b temp</code> 创建一个 temp branch，这样临时HEAD上修改的东西就不会被丢掉了。<br>然后切换到 dev 分支上，在使用 git branch merge temp，就可以把 temp 分支上的代码合并到 dev 上了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/07/13/2016-07-13-Git日常操作/" data-id="cismdphc0001gpsnvx9hugi77" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/工具/">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-07-07-iOS开发迎来机器学习的春天---TensorFlow" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexo-test/2016/07/07/2016-07-07-iOS开发迎来机器学习的春天---TensorFlow/" class="article-date">
+  <time datetime="2016-07-06T16:00:00.000Z" itemprop="datePublished">2016-07-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexo-test/2016/07/07/2016-07-07-iOS开发迎来机器学习的春天---TensorFlow/">iOS开发迎来机器学习的春天---TensorFlow</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div align="center"><br>    <img src="/assets/images/tfimg/logo.jpg" height="300" width="500"><br></div> 
+
+
+<p>　　<code>人工智能</code>、<code>机器学习</code>都已走进了我们的日常，尤其是愈演愈热的大数据更是跟我们的生活息息相关，做 <code>人工智能</code>、<code>数据挖掘</code>的人在其他人眼中感觉是很高大上的，总有一种遥不可及的感觉，在我司也经常会听到数据科学部的同事们提到 <code>机器学习</code>、<code>数据挖掘</code> 之类的词。但这些名词真的跟我们移动开发就没直接关系了吗？<br>　　作为移动开发者来说，无时无刻不被这些名词狠狠地敲打着脆弱的内心。💢 💢 💢  何时才能够将<code>机器学习</code>、<code>深度学习</code>应用在移动端，敲响移动端<code>机器学习</code>工业化的大门呢？</p>
+<blockquote>
+<p>想象一下，某一天你身处一个完全陌生的环境，周围都是陌生的事物，而运行在iPhone的某个APP却对这个环境了如指掌，你要做的就是打开这个APP，输入你需要了解的事物，iPhone告诉你这个事物的信息，你也就没有了陌生事物了。世界就在眼前！</p>
+</blockquote>
+<p>如下图：</p>
+<div align="center"><br>    <img src="/assets/images/tfimg/ck.jpg" height="300" width="160"><br>　　<img src="/assets/images/tfimg/mouse2.jpg" height="300" width="160"><br>　　<img src="/assets/images/tfimg/wb.jpg" height="300" width="160"><br></div> 
+
+<p>上面物体的识别准确率还是蛮不错的，基本识别出了键盘（49%的概率）、鼠标（46%的概率）和水杯（24%的概率）。</p>
+<p>但是在某些事物的识别准确度方便却差强人意，比如下图：    </p>
+<div align="center"><br>　　<img src="/assets/images/tfimg/ipod2.jpg" height="300" width="160"><br>　　<img src="/assets/images/tfimg/ipod1.jpg" height="300" width="160"><br></div><br>　　iPhone 6被识别成了iPod（59%的概率），而iPod的却是不怎么敢认（10%的概率）。想想最崩溃的估计是iPhone 6了，身价直接被降了好几个等级。<br><br><div align="center"><br>　　<img src="/assets/images/tfimg/wq.jpg" height="320" width="240"><br></div> 
+
+<p>　　上面的例子来自于TensorFlow官方iOSDemo，暂且不评述TensorFlow的识别准确度如何，毕竟它还年轻，但是仅凭其识别能力的体现，也给机器学习在移动端的运用带来了无限的可能。</p>
+<h3 id="一、TensorFlow（简称TF）"><a href="#一、TensorFlow（简称TF）" class="headerlink" title="一、TensorFlow（简称TF）"></a>一、TensorFlow（简称TF）</h3><p>　　去年，Google资深系统专家Jeff Dean在湾区机器学习大会上隆重介绍了其第二代深度学习系统<a href="http://www.tensorflow.org/" target="_blank" rel="external">TensorFlow</a>，一时间网络上针对TensorFlow的文章铺天盖地，<a href="http://www.leiphone.com/news/201511/UDLyNds2oSTwM2yZ.html" target="_blank" rel="external">揭秘TensorFlow：Google开源到底开的是什么？</a>、<a href="http://www.leiphone.com/news/201511/Voza1pFNQB4bzKdR.html" target="_blank" rel="external">Google开源TensorFlow系统，这背后都有什么门道？</a>、<a href="http://www.zhihu.com/question/37243838" target="_blank" rel="external">如何评价Google发布的第二代深度学习系统TensorFlow?</a>等等文章，TensorFlow的燎原之火一直在燃烧蔓延着，其<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">GitHub上的开源库</a>在此文撰写时，也已经被<code>star：27550</code>，<code>fork：11054</code>了。🔥 🔥 🔥 🔥 🔥 </p>
+<p>不负众望，Google一直宣称平台移植性非常好的TensorFlow，终于在2016年6月27日，发布0.9版本，宣布移动端支持。<a href="https://developers.googleblog.com/2016/06/tensorflow-v09-now-available-with.html" target="_blank" rel="external">TensorFlow v0.9 now available with improved mobile support</a>( 有墙💢 )，同时也给出了移动端的<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/ios_examples" target="_blank" rel="external">Demo</a>，对于代码为生的程序员，身处大数据处理为主导的<a href="http://www.talkingdata.com/" target="_blank" rel="external">TalkingData</a>，也小试身手了一把，下载TensorFlow源码，查看编译指南，开始跳坑、填坑之路，也成就了此篇拙文的产生。</p>
+<h3 id="二、从TensorFlow到iOS静态库"><a href="#二、从TensorFlow到iOS静态库" class="headerlink" title="二、从TensorFlow到iOS静态库"></a>二、从TensorFlow到iOS静态库</h3><p>对于iOS平台下如何使用TensorFlow，TensorFlow给出了详细的编译脚本命令，详情请查看<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/makefile" target="_blank" rel="external">官方文档的命令</a>。</p>
+<h5 id="第一步-工具准备"><a href="#第一步-工具准备" class="headerlink" title="第一步. 工具准备"></a>第一步. 工具准备</h5><p><code>工欲善其事必先利其器</code>，在开始编译工作之前，需要准备一些编译所必须的工具：</p>
+<ol>
+<li><a href="http://brew.sh/" target="_blank" rel="external">Homebrew</a>: Mac os x 上包管理工具，具体使用方法可参考<a href="http://brew.sh/index_zh-cn.html" target="_blank" rel="external">Doc</a>。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure>
+<ol>
+<li>Homebrew安装好之后，依次安装三个辅助性编译工具：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ brew install libtool   </div><div class="line">$ brew install autoconf   </div><div class="line">$ brew install automake</div></pre></td></tr></table></figure>
+<blockquote>
+<p>三个工具的含义，请参考：<a href="https://en.wikipedia.org/wiki/GNU_Libtool" target="_blank" rel="external">https://en.wikipedia.org/wiki/GNU_Libtool</a></p>
+</blockquote>
+<h5 id="第二步-克隆TensorFlow"><a href="#第二步-克隆TensorFlow" class="headerlink" title="第二步. 克隆TensorFlow"></a>第二步. 克隆TensorFlow</h5><p>Google以<a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="external">Apache 2.0</a>开源协议将TensorFlow开源在<a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">GitHub</a>上，我们可以直接使用TensorFlow源码。</p>
+<p>在任意你想存放TensorFlow源码的地方（建议不要放在桌面。^_^），clone项目。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git clone https://github.com/tensorflow/tensorflow</div></pre></td></tr></table></figure>
+<h5 id="第三步-编译前准备"><a href="#第三步-编译前准备" class="headerlink" title="第三步. 编译前准备"></a>第三步. 编译前准备</h5><p>　　在TensorFlow的<code>tensorflow/contrib/makefile/</code>目录下，有很多可使用的编译脚本，其中<code>build_all_ios.sh</code>脚本专门用来一键编译TensorFlow iOS静态库。虽然可以直接使用此脚本进行一键编译，但是因为有墙，某些依赖需要提前做处理。</p>
+<ol>
+<li><p>下载protobuf</p>
+<p> protobuf 是编译前唯一需要特殊处理的依赖库，<a href="https://github.com/google/protobuf/archive/master.zip" target="_blank" rel="external">点击下载</a>，下载protobuf之后，解压，备用。</p>
+</li>
+</ol>
+<ol>
+<li><p>下载googlemock</p>
+<p> 虽然protobuf编译脚本<code>autogen.sh</code>中的googlemock链接地址<code>https://googlemock.googlecode.com/files/gmock-1.7.0.zip</code>无法直接下载到，但是细心的人会发现，在浏览器中输入<code>https://googlemock.googlecode.com/</code>地址后，会跳转到<code>https://github.com/google/googlemock</code>地址，google在GiHub上的仓库地址。而GitHub上的仓库，我们可以直接的下载，克隆等。</p>
+<p> 我们直接在GitHub上下载googlemock(<a href="https://github.com/google/googlemock/archive/master.zip" target="_blank" rel="external">点击下载</a>)，下载完成后，修改压缩包名字为<code>gmock-1.7.0.zip</code>，修改后将此压缩包移至上一步protobuf文件夹目录下，备用。</p>
+</li>
+<li><p>修改下载依赖脚本，移除protobuf的下载</p>
+<p> 在<code>tensorflow/contrib/makefile/</code>目录下，<code>download_dependencies.sh</code>脚本用来下载相关依赖，打开此脚本文件，注释掉或者直接删掉<code>git clone https://github.com/google/protobuf.git ${DOWNLOADS_DIR}/protobuf</code>部分，目的是不让脚本去下载protobuf。</p>
+<p> 上面三步准备好后，接下来就进入静态库编译了。</p>
+</li>
+</ol>
+<h5 id="第四步-一键编译"><a href="#第四步-一键编译" class="headerlink" title="第四步. 一键编译"></a>第四步. 一键编译</h5><p>　　前面已经知道在TensorFlow文件夹<code>tensorflow/contrib/makefile/</code>目录下的<code>build_all_ios.sh</code>脚本是用来编译iOS静态库的脚本，因此可以直接执行此脚本，开始静态库的编译工作了。</p>
+<p>　　但是有一个问题大家可能会发现，由于编译TensorFlow需要用到protobuf，但是protobuf使我们自己手动下载的，该怎么让手动下载的protobuf能够直接让<code>build_all_ios.sh</code>脚本使用呢？</p>
+<p>　　答案是<code>复制、粘贴</code>。可能有些low，但是有效。执行命令 <code>build_all_ios.sh</code>之后，立即把之前手动下载的protobuf文件夹拷贝进<code>tensorflow/contrib/makefile/downloads</code>目录。（放心，你拷贝的速度会很快，不会影响编译的执行的。^_^） </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ build_all_ios.sh</div></pre></td></tr></table></figure>
+<p>　　一切准备就绪，接下来就是静静的等待编译完成了。在Mac编译的过程中，建议插上电源，最好不要让设备休眠断电，也最好不要去干别的东西，出去溜达一圈，回来后就看到战果了。</p>
+<p> 编译完成之后，会在<code>tensorflow/contrib/makefile/gen/</code>目录下看到编译的结果，关于这些静态库该如何使用，自己的项目如何应用，请参考<a href="https://github.com/tensorflow/tensorflow/tree/master/tensorflow/contrib/ios_examples" target="_blank" rel="external">TensorFlow iOS Examples</a>。</p>
+<h3 id="三、遇到的问题"><a href="#三、遇到的问题" class="headerlink" title="三、遇到的问题"></a>三、遇到的问题</h3><p>1、googlecode.com被墙了，需要翻墙！（目前测试挂了VPN也没用），这也是上面编译前准备为什么要那么做的原因。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl: (7) Failed to connect to googlemock.googlecode.com port 443: Operation timed out</div></pre></td></tr></table></figure>
+<p>解决： 请参考 『第三步. 编译前准备』。</p>
+<p>2、没有Xcode。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xcrun: error: SDK &quot;iphoneos&quot; cannot be located</div><div class="line">xcrun: error: SDK &quot;iphoneos&quot; cannot be located</div><div class="line">xcrun: error: unable to lookup item &apos;PlatformPath&apos; in SDK &apos;iphoneos&apos;</div><div class="line">+ IPHONEOS_PLATFORM=</div></pre></td></tr></table></figure>
+<p>解决：安装Xcode，从上面报错的命令中可以看到，在编译静态库的过程中使用了<code>xcrun</code>，而此命令是xCode本身具有的能力。</p>
+<p>3、你的Xcode版本不是7.3或以后，或者你有多个Xcode，而默认的安装路径版本不是7.3或以后。</p>
+<p>```<br>error: Xcode 7.3.0 or later is required.</p>
+<ul>
+<li>exit 1<br>```/</li>
+</ul>
+<p>解决：更新Xcode至最新版本，并且保证默认路径下是最新/版本。</p>
+<p>如果Xcode是7.3，并且没有条件更新Xcode，你可以修改<code>tensorflow/contrib/makefile/compile_ios_tensorflow.sh</code> 里的<code>REQUIRED_XCODE_VERSION=7.3.0</code>，为<code>REQUIRED_XCODE_VERSION=7.3</code>。（这样修改，目前还不确定会不会带来一些其他影响，最好是升级你的Xcode）</p>
+<h3 id="四、参考链接"><a href="#四、参考链接" class="headerlink" title="四、参考链接"></a>四、参考链接</h3><ul>
+<li><a href="http://tensorfly.cn/" target="_blank" rel="external">TensorFlow 中文社区</a></li>
+<li><a href="https://www.tensorflow.org/mobile.html" target="_blank" rel="external">TensorFlow for Mobile</a></li>
+<li><a href="http://chenrudan.github.io/blog/2015/11/18/comparethreeopenlib.html" target="_blank" rel="external">Caffe、TensorFlow、MXnet三个开源库对比</a>   </li>
+<li><a href="http://weibo.com/p/1001603907610737775666" target="_blank" rel="external">如何评价Tensorflow和其它深度学习系统</a>    </li>
+<li><a href="http://www.algorithmdog.com/%E8%B0%81%E5%B0%86%E5%A4%BA%E5%8F%96%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%B7%A5%E4%B8%9A%E6%A0%87%E5%87%86%E7%9A%84%E8%8D%A3%E8%80%80" target="_blank" rel="external">深度学习框架大战正在进行，谁将夺取“深度学习工业标准”的荣耀？</a>  </li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/07/07/2016-07-07-iOS开发迎来机器学习的春天---TensorFlow/" data-id="cismdph8h0009psnv2cfvjkzr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-07-05-ML(1)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexo-test/2016/07/05/2016-07-05-ML(1)/" class="article-date">
+  <time datetime="2016-07-04T16:00:00.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexo-test/2016/07/05/2016-07-05-ML(1)/">机器学习入门（名词科普）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="通用名词"><a href="#通用名词" class="headerlink" title="通用名词"></a>通用名词</h3><h4 id="ML"><a href="#ML" class="headerlink" title="ML"></a>ML</h4><p>　　<strong>名词解释：</strong> 机器学习(Machine Learning)是一门多领域交叉学科，涉及概率论、统计学、逼近论、凸分析、算法复杂度理论等多门学科。专门研究计算机怎样模拟或实现人类的学习行为，以获取新的知识或技能，重新组织已有的知识结构使之不断改善自身的性能。<br>　　它是人工智能的核心，是使计算机具有智能的根本途径，其应用遍及人工智能的各个领域，它主要使用归纳、综合而不是演绎。</p>
+<h4 id="DL"><a href="#DL" class="headerlink" title="DL"></a>DL</h4><p>　　<strong>名词解释：</strong> 深度学习（Deep Learning）是机器学习拉出的分支，它试图使用包含复杂结构或由多重非线性变换构成的多个处理层对数据进行高层抽象的算法。<br>　　深度学习是机器学习中表征学习方法。观测值（例如一幅图像）可以使用多种方式来表示，如每个像素强度值的矢量，或者更抽象地表示成一系列边、特定形状的区域等。而使用某些特定的表示方法更容易从实例中学习任务（例如，人脸识别或面部表情识别）。深度学习的好处是将用非监督式或半监督式的特征学习和分层特征提取的高效算法来替代手工获取特征。</p>
+<h4 id="CNN"><a href="#CNN" class="headerlink" title="CNN"></a>CNN</h4><p>　　<strong>名词解释：</strong> 卷积神经网络（Convolutional neural networks，简称CNNs）是一种深度的监督学习下的机器学习模型</p>
+<h3 id="算法名词"><a href="#算法名词" class="headerlink" title="算法名词"></a>算法名词</h3><h4 id="KNN"><a href="#KNN" class="headerlink" title="KNN:"></a>KNN:</h4><p>　　<strong>名词解释：</strong> 邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法。<br>　　邻近算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。<br>　　kNN算法的核心思想是如果一个样本在特征空间中的k个最相邻的样本中的大多数属于某一个类别，则该样本也属于这个类别，并具有这个类别上样本的特性。该方法在确定分类决策上只依据最邻近的一个或者几个样本的类别来决定待分样本所属的类别。 kNN方法在类别决策时，只与极少量的相邻样本有关。由于kNN方法主要靠周围有限的邻近的样本，而不是靠判别类域的方法来确定所属类别的，因此对于类域的交叉或重叠较多的待分样本集来说，kNN方法较其他方法更为适合。</p>
+<h4 id="SVM"><a href="#SVM" class="headerlink" title="SVM:"></a>SVM:</h4><p>　　<strong>名词解释：</strong> 支持向量机（Support Vector Machine）。<br>　　在机器学习领域，支持向量机SVM(Support Vector Machine)是一个有监督的学习模型，通常用来进行模式识别、分类、以及回归分析。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/07/05/2016-07-05-ML(1)/" data-id="cismdph8t000dpsnvqap4jx1t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2016-06-02-开发常用工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/hexo-test/2016/06/02/2016-06-02-开发常用工具/" class="article-date">
+  <time datetime="2016-06-02T03:15:06.000Z" itemprop="datePublished">2016-06-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/hexo-test/2016/06/02/2016-06-02-开发常用工具/">开发常用工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>个人开发常用工具的收集</p>
+        
+          <p class="article-more-link">
+            <a href="/hexo-test/2016/06/02/2016-06-02-开发常用工具/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/06/02/2016-06-02-开发常用工具/" data-id="cismdph850006psnvopgpanth" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/工具/">工具</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2016-04-07-iBeacon" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/hexo-test/2016/04/07/2016-04-07-iBeacon/" class="article-date">
@@ -98,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/04/07/2016-04-07-iBeacon/" data-id="cisl5hblv000790nvjdihmvor" class="article-share-link">Share</a>
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/04/07/2016-04-07-iBeacon/" data-id="cismdph7y0004psnvo99ywus6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/技术分享/">技术分享</a></li></ul>
@@ -141,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/04/02/2016-04-02-CocoaPod使用心得/" data-id="cisl5hblv000590nvbxg2hu2d" class="article-share-link">Share</a>
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/04/02/2016-04-02-CocoaPod使用心得/" data-id="cismdph7g0001psnv5viynw37" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/工具/">工具</a></li></ul>
@@ -189,7 +454,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/01/09/2016-01-09-iOS动态更新/" data-id="cisl5hblg000490nvqgkha33g" class="article-share-link">Share</a>
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2016/01/09/2016-01-09-iOS动态更新/" data-id="cismdph7t0003psnve1um8q16" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/iOS/">iOS</a></li></ul>
@@ -232,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jggnice.top/hexo-test/hexo-test/2015/09/26/2015-09-26-iOS9 变化笔记/" data-id="cisl5hblg000290nvo0smvznv" class="article-share-link">Share</a>
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2015/09/26/2015-09-26-iOS9 变化笔记/" data-id="cismdph770000psnv2pra31k3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/iOS/">iOS</a></li></ul>
@@ -275,7 +540,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jggnice.top/hexo-test/hexo-test/2015/08/25/2015-08-25-HEXO搭建个人博客/" data-id="cisl5hbl0000090nvywzo9mf2" class="article-share-link">Share</a>
+      <a data-url="http://jggnice.top/hexo-test/hexo-test/2015/08/25/2015-08-25-HEXO搭建个人博客/" data-id="cismdph9x000rpsnvd1x6ebg2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/hexo-test/tags/博客/">博客</a></li></ul>
@@ -303,7 +568,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/参考博客/">参考博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/技术分享/">技术分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/机器学习/">机器学习</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/iOS/">iOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/joke/">joke</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/python31/">python31</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/博客/">博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/参考博客/">参考博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/工具/">工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/技术/">技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/技术分享/">技术分享</a></li><li class="tag-list-item"><a class="tag-list-link" href="/hexo-test/tags/机器学习/">机器学习</a></li></ul>
     </div>
   </div>
 
@@ -313,7 +578,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/hexo-test/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/hexo-test/tags/python/" style="font-size: 10px;">python</a> <a href="/hexo-test/tags/博客/" style="font-size: 15px;">博客</a> <a href="/hexo-test/tags/参考博客/" style="font-size: 10px;">参考博客</a> <a href="/hexo-test/tags/工具/" style="font-size: 20px;">工具</a> <a href="/hexo-test/tags/技术/" style="font-size: 10px;">技术</a> <a href="/hexo-test/tags/技术分享/" style="font-size: 10px;">技术分享</a> <a href="/hexo-test/tags/机器学习/" style="font-size: 15px;">机器学习</a>
+      <a href="/hexo-test/tags/iOS/" style="font-size: 15px;">iOS</a> <a href="/hexo-test/tags/joke/" style="font-size: 15px;">joke</a> <a href="/hexo-test/tags/markdown/" style="font-size: 15px;">markdown</a> <a href="/hexo-test/tags/python/" style="font-size: 10px;">python</a> <a href="/hexo-test/tags/python31/" style="font-size: 10px;">python31</a> <a href="/hexo-test/tags/博客/" style="font-size: 15px;">博客</a> <a href="/hexo-test/tags/参考博客/" style="font-size: 10px;">参考博客</a> <a href="/hexo-test/tags/工具/" style="font-size: 20px;">工具</a> <a href="/hexo-test/tags/技术/" style="font-size: 10px;">技术</a> <a href="/hexo-test/tags/技术分享/" style="font-size: 10px;">技术分享</a> <a href="/hexo-test/tags/机器学习/" style="font-size: 15px;">机器学习</a>
     </div>
   </div>
 
@@ -335,23 +600,23 @@
       <ul>
         
           <li>
-            <a href="/hexo-test/2016/09/02/test2/">test2</a>
+            <a href="/hexo-test/2016/09/03/2016-09-03-markdown-language/">markdown language</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-test/2016/09/03/2016-09-03-Markdown/">introduction to Markdown</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-test/2016/09/02/2016-09-02松叔没品笑话 80/">【松叔没品笑话 80】此地无淫三百两，隔壁老王不曾偷</a>
+          </li>
+        
+          <li>
+            <a href="/hexo-test/2016/09/02/2016-09-02-女生不喜欢一个人会有什么表现/">女生不喜欢一个人会有什么表现？</a>
           </li>
         
           <li>
             <a href="/hexo-test/2016/09/02/2016-06-12-HEXO进阶/">HEXO进阶</a>
-          </li>
-        
-          <li>
-            <a href="/hexo-test/2016/09/01/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/hexo-test/2016/08/04/参考博客README/">参考博客</a>
-          </li>
-        
-          <li>
-            <a href="/hexo-test/2016/08/04/2016-08-04-Python自动化测试iOS项目/">Python自动化测试iOS项目</a>
           </li>
         
       </ul>
